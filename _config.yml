@@ -1,9 +1,0 @@
-permalink:     /:year-:month-:day/:title.html
-url:           http://uternet.github.io
-author:        Lazy_Pig
-paginate:      15
-pygments:      true
-safe:          true
-auto:          true
-
-theme:         jekyll-theme-slate
