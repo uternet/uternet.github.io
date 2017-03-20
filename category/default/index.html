@@ -1,8 +1,8 @@
 ---
 layout: list
+title:  Default category
 ---
 
-<!-- 首页即博客列表 -->
-{% assign list = site.posts %}
+{% assign list = site.categories.default %}
 {% assign preview = true %}
 {% include list.tpl %}
