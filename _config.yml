@@ -1,0 +1,4 @@
+theme:         jekyll-theme-midnight
+permalink:     /:year-:month-:day/:title.html
+url:           http://uternet.github.io
+title:         Lazy_Pig
