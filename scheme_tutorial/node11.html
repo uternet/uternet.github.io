@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Equivalence predicates</TITLE>
+<META NAME="description" CONTENT="Equivalence predicates">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node12.html">
+<LINK REL="previous" HREF="node10.html">
+<LINK REL="up" HREF="schemetutorial.html">
+<LINK REL="next" HREF="node12.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<B> Next:</B> <A NAME="tex2html327"
+  HREF="node12.html">Input and output</A>
+<B> Previous:</B> <A NAME="tex2html317"
+  HREF="node10.html">Data types</A>
+ &nbsp <B>  <A NAME="tex2html325"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html328"
+  HREF="node11.html#SECTION001110000000000000000">=</A>
+<LI><A NAME="tex2html329"
+  HREF="node11.html#SECTION001120000000000000000">eq?</A>
+<LI><A NAME="tex2html330"
+  HREF="node11.html#SECTION001130000000000000000">eqv?</A>
+<LI><A NAME="tex2html331"
+  HREF="node11.html#SECTION001140000000000000000">equal?</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION001100000000000000000"></A>
+<A NAME="equiv"></A>
+<BR>
+Equivalence predicates
+</H1>
+
+<P>
+There are a couple of procedures for testing equality in Scheme.
+
+<P>
+
+<H1><A NAME="SECTION001110000000000000000"></A>
+<A NAME="equiv_"></A>
+<BR>
+=
+</H1>
+<TT>=</TT> can be used to test the equality of two exact numbers, but
+should not be used e.g. for testing the equality of two floating point 
+numbers. For example:
+<PRE>
+&gt; (= 2 (* 1 2))
+#t
+&gt; (= 2 (* 2 2))
+#f
+</PRE>
+
+<P>
+Floating point numbers should be tested for equality by determining an 
+accuracy and by checking whether the two numbers are close enough to each 
+other. For example, let's say that we want to define <IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img6.png"
+ ALT="pi"> like this:
+<PRE>
+&gt; (define pi (acos -1))
+</PRE>
+
+<P>
+Now, let's see what happens when we try to use = to compare the value 
+<I>a</I> evaluates to (as printed on the screen) and the same value written
+by ourselves:
+<PRE>
+&gt; pi
+3.1415926535898
+&gt; (= 3.1415926535898 pi)
+#f
+</PRE>
+
+<P>
+Pretty spooky! A better way to test for equality would be to determine an 
+accuracy of, for example, 0.001 and then to define a procedure 
+<I>good-enough?</I> to check whether the two numbers are equal enough:
+
+<PRE>
+(define acc 0.001)
+
+(define good-enough?
+  (lambda (x y)
+    (&lt; (abs (- x y)) acc)))
+
+(define feq
+  (lambda (x y)
+    (good-enough? x y)))
+
+&gt; (feq pi 3.1415926535898)
+#t
+</PRE>
+
+<P>
+
+<H1><A NAME="SECTION001120000000000000000">
+eq?</A>
+</H1>
+
+<P>
+The <TT>eq?</TT> procedure is quite similar to <TT>eqv?</TT> (see below), but
+is a little bit more strict. It has the following syntax:
+
+<P>
+<PRE>
+(eq? obj1 obj2)
+</PRE>
+
+<P>
+The procedure <TT>eq?</TT> can be used for testing sameness of
+symbols, which are identical if they are spelled exactly the same
+way<A NAME="tex2html17"
+  HREF="footnode.html#foot2008"><SUP>9.1</SUP></A>:
+<PRE>
+&gt; (eq? 'foo 'foo)
+#t
+&gt; (eq? 'foo 'fooo)
+#f
+&gt; (define foo 'foo)
+&gt; (eq? foo 'foo)
+#t
+</PRE>
+
+<P>
+In general, <TT>eq?</TT> returns <TT>#t</TT> if its arguments are
+identical in every  possible way, otherwise it returns
+<TT>#f</TT>. For example, if <TT>cons</TT> is  called twice with the
+same arguments, it still creates two distinct pairs and  therefore
+<TT>eq?</TT> would evaluate to <TT>#f</TT>:
+<PRE>
+&gt; (eq? (cons 'a 'b) (cons 'a 'b))
+#f
+&gt; (define a (cons 'a 'b))
+&gt; (define b (cons 'a 'b))
+&gt; (define c a)
+&gt; (eq? a b)
+#f
+&gt; (eq? a c)
+#t
+</PRE>
+
+<P>
+Even if <I>a</I> and <I>b</I> have the same contents, they still refer
+to different pairs and are therefore considered to be non-equal. <I>c</I> on
+the other hand will refer to the same pair as <I>a</I>, so <I>a</I> and
+<I>c</I> can be considered equal in every respect. 
+
+<P>
+The behaviour of <TT>eq?</TT> on numbers and characters is implementation
+dependent and it may also behave differently from <TT>eqv?</TT> on empty 
+strings and vectors. However, it is usually more efficient to use <TT>eq?</TT>
+than <TT>eqv?</TT>, so unless the features of <TT>eqv?</TT> are needed,
+<TT>eq?</TT> should be used. 
+
+<P>
+
+<H1><A NAME="SECTION001130000000000000000">
+eqv?</A>
+</H1>
+
+<P>
+The <TT>eqv?</TT> procedure defines an equivalence between objects and
+should return <TT>#t</TT> if the objects compared can be regarded as the same
+object. <TT>eqv?</TT> has the following syntax:
+
+<P>
+<PRE>
+(eqv? obj1 obj2)
+</PRE>
+
+<P>
+<TT>eqv?</TT> returns <TT>#t</TT> if obj1 and obj2 are both true or both false,
+if both are symbols and spelled the same way, if both are numbers and 
+numerically equal, if both are characters and are the same character 
+according to <TT>char=?</TT>, if both are the empty list, if they are pairs,
+lists or vectors that denote the same locations in the store or if they are
+procedures whose location tags are equal. Practically, it does not differ that
+much from <TT>eq?</TT>, but in cases where the behaviour of <TT>eq?</TT> is not
+specified, <TT>eqv?</TT> should be used.
+<PRE>
+&gt; (eqv? (* 2 2) (sqrt 16))
+#t
+&gt; (eqv? (cons 'a 'b) (cons 'a 'b))
+#f
+&gt; (eqv? 'foo 'foo)
+#t
+&gt; (eqv? "" (substring "foobar" 0 0))
+#f
+</PRE>
+
+<P>
+
+<H1><A NAME="SECTION001140000000000000000">
+equal?</A>
+</H1>
+
+<P>
+The <TT>equal?</TT> procedure compares the contents of pairs, vectors and
+strings and applies <TT>eqv?</TT> on other objects. The syntax of 
+<TT>equal?</TT> is the following:
+
+<P>
+<PRE>
+(equal? obj1 obj2)
+</PRE>
+
+<P>
+Hence, <TT>equal?</TT> can be considered to be a general procedure for testing
+sameness. If you don't know what type of arguments you will be testing for
+equality, you should use <TT>equal?</TT>. Note though, that <TT>equal?</TT>
+might not return what you would expect when dealing with inexact numbers. You
+should therefore not rely on <TT>equal?</TT> being the universal procedure for
+comparing just about anything. Remember that <TT>equal?</TT> uses <TT>eqv?</TT>
+on objects that are not pairs, vectors and strings!
+For example:
+<PRE>
+&gt; (equal? 3 (/ 6 2))
+#t
+&gt; (equal? 3 (/ 6 2.0))
+#f
+</PRE>
+
+<P>
+The procedure <TT>equal?</TT> tests the sameness of its arguments by comparing
+the contents, for example:
+<PRE>
+&gt; (equal? (cons 'a 'b) (cons 'a 'b))
+#t
+&gt; (equal? 'foo 'foo)
+#t
+&gt; (equal? "" (substring "foobar" 0 0))
+#t
+</PRE>
+
+<P>
+Note that <TT>equal?</TT> may fail if applied to circular data structures.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<B> Next:</B> <A NAME="tex2html327"
+  HREF="node12.html">Input and output</A>
+<B> Previous:</B> <A NAME="tex2html317"
+  HREF="node10.html">Data types</A>
+ &nbsp <B>  <A NAME="tex2html325"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>

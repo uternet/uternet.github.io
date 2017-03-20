@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Scheme Tutorial</TITLE>
+<META NAME="description" CONTENT="Scheme Tutorial">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node1.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+
+<B> Next:</B> <A NAME="tex2html22"
+  HREF="node2.html">Foreword</A>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<H1 ALIGN=CENTER>Scheme Tutorial</H1>
+<P ALIGN=CENTER><STRONG>Catharina Candolin
+<BR>
+candolin@cs.hut.fi</STRONG></P>
+<P ALIGN=LEFT></P>
+in
+<DIV ALIGN="CENTER">
+<I>To the Schememonster</I></DIV>
+
+<BR><HR>
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"></A>
+
+<UL>
+
+<LI><A NAME="tex2html24"
+  HREF="node2.html">前言</A>
+<UL>
+<LI><A NAME="tex2html25"
+  HREF="node2.html#SECTION00210000000000000000">致谢</A>
+</UL>
+<LI><A NAME="tex2html26"
+  HREF="node3.html">介绍</A>
+<UL>
+<LI><A NAME="tex2html27"
+  HREF="node3.html#SECTION00310000000000000000">Scheme 的历史</A>
+<LI><A NAME="tex2html28"
+  HREF="node3.html#SECTION00320000000000000000">Scheme 作为一种语言</A>
+<LI><A NAME="tex2html29"
+  HREF="node3.html#SECTION00330000000000000000">Scheme 的应用</A>
+<LI><A NAME="tex2html30"
+  HREF="node3.html#SECTION00340000000000000000">为什么说 Scheme 是良好的入门语言?</A>
+</UL>
+<LI><A NAME="tex2html31"
+  HREF="node4.html">入门</A>
+<UL>
+<LI><A NAME="tex2html32"
+  HREF="node4.html#SECTION00410000000000000000">语法</A>
+<LI><A NAME="tex2html33"
+  HREF="node4.html#SECTION00420000000000000000">表达式</A>
+<LI><A NAME="tex2html34"
+  HREF="node4.html#SECTION00430000000000000000">Define</A>
+<LI><A NAME="tex2html35"
+  HREF="node4.html#SECTION00440000000000000000">Lambda</A>
+<LI><A NAME="tex2html36"
+  HREF="node4.html#SECTION00450000000000000000">Let, let* and letrec</A>
+<UL>
+<LI><A NAME="tex2html37"
+  HREF="node4.html#SECTION00451000000000000000">Let</A>
+<LI><A NAME="tex2html38"
+  HREF="node4.html#SECTION00452000000000000000">Let*</A>
+<LI><A NAME="tex2html39"
+  HREF="node4.html#SECTION00453000000000000000">命名的 let</A>
+<LI><A NAME="tex2html40"
+  HREF="node4.html#SECTION00454000000000000000">Letrec</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html41"
+  HREF="node5.html">条件表达式</A>
+<UL>
+<LI><A NAME="tex2html42"
+  HREF="node5.html#SECTION00510000000000000000">if 表达式</A>
+<LI><A NAME="tex2html43"
+  HREF="node5.html#SECTION00520000000000000000">cond 表达式</A>
+<LI><A NAME="tex2html44"
+  HREF="node5.html#SECTION00530000000000000000">case 表达式</A>
+</UL>
+<LI><A NAME="tex2html45"
+  HREF="node6.html">逻辑运算符</A>
+<UL>
+<LI><A NAME="tex2html46"
+  HREF="node6.html#SECTION00610000000000000000">and</A>
+<LI><A NAME="tex2html47"
+  HREF="node6.html#SECTION00620000000000000000">or</A>
+<LI><A NAME="tex2html48"
+  HREF="node6.html#SECTION00630000000000000000">not</A>
+</UL>
+<LI><A NAME="tex2html49"
+  HREF="node7.html">引用和 quasiquote</A>
+<UL>
+<LI><A NAME="tex2html50"
+  HREF="node7.html#SECTION00710000000000000000">引用</A>
+<LI><A NAME="tex2html51"
+  HREF="node7.html#SECTION00720000000000000000">Quasiquote</A>
+</UL>
+<LI><A NAME="tex2html52"
+  HREF="node8.html">过程</A>
+<UL>
+<LI><A NAME="tex2html53"
+  HREF="node8.html#SECTION00810000000000000000">递归</A>
+<UL>
+<LI><A NAME="tex2html54"
+  HREF="node8.html#SECTION00811000000000000000">浅递归</A>
+<LI><A NAME="tex2html55"
+  HREF="node8.html#SECTION00812000000000000000">深递归</A>
+<LI><A NAME="tex2html56"
+  HREF="node8.html#SECTION00813000000000000000">尾递归</A>
+</UL>
+<LI><A NAME="tex2html57"
+  HREF="node8.html#SECTION00820000000000000000">do 迭代</A>
+</UL>
+<LI><A NAME="tex2html58"
+  HREF="node9.html">命令式编程</A>
+<LI><A NAME="tex2html59"
+  HREF="node10.html">数据类型</A>
+<UL>
+<LI><A NAME="tex2html60"
+  HREF="node10.html#SECTION001010000000000000000">数字</A>
+<UL>
+<LI><A NAME="tex2html61"
+  HREF="node10.html#SECTION001011000000000000000">数字运算</A>
+</UL>
+<LI><A NAME="tex2html62"
+  HREF="node10.html#SECTION001020000000000000000">布尔值</A>
+<UL>
+<LI><A NAME="tex2html63"
+  HREF="node10.html#SECTION001021000000000000000">布尔值运算</A>
+</UL>
+<LI><A NAME="tex2html64"
+  HREF="node10.html#SECTION001030000000000000000">字符</A>
+<UL>
+<LI><A NAME="tex2html65"
+  HREF="node10.html#SECTION001031000000000000000">字符运算</A>
+</UL>
+<LI><A NAME="tex2html66"
+  HREF="node10.html#SECTION001040000000000000000">符号</A>
+<UL>
+<LI><A NAME="tex2html67"
+  HREF="node10.html#SECTION001041000000000000000">符号运算</A>
+</UL>
+<LI><A NAME="tex2html68"
+  HREF="node10.html#SECTION001050000000000000000">字符串</A>
+<UL>
+<LI><A NAME="tex2html69"
+  HREF="node10.html#SECTION001051000000000000000">字符串运算</A>
+</UL>
+<LI><A NAME="tex2html70"
+  HREF="node10.html#SECTION001060000000000000000">点对和列表</A>
+<UL>
+<LI><A NAME="tex2html71"
+  HREF="node10.html#SECTION001061000000000000000">对点</A>
+<LI><A NAME="tex2html72"
+  HREF="node10.html#SECTION001062000000000000000">列表</A>
+<LI><A NAME="tex2html73"
+  HREF="node10.html#SECTION001063000000000000000">点对和列表运算</A>
+</UL>
+<LI><A NAME="tex2html74"
+  HREF="node10.html#SECTION001070000000000000000">向量</A>
+<UL>
+<LI><A NAME="tex2html75"
+  HREF="node10.html#SECTION001071000000000000000">向量运算</A>
+</UL>
+</UL>
+<LI><A NAME="tex2html76"
+  HREF="node11.html">相等谓词</A>
+<UL>
+<LI><A NAME="tex2html77"
+  HREF="node11.html#SECTION001110000000000000000">=</A>
+<LI><A NAME="tex2html78"
+  HREF="node11.html#SECTION001120000000000000000">eq?</A>
+<LI><A NAME="tex2html79"
+  HREF="node11.html#SECTION001130000000000000000">eqv?</A>
+<LI><A NAME="tex2html80"
+  HREF="node11.html#SECTION001140000000000000000">equal?</A>
+</UL>
+<LI><A NAME="tex2html81"
+  HREF="node12.html">输入和输出</A>
+<UL>
+<LI><A NAME="tex2html82"
+  HREF="node12.html#SECTION001210000000000000000">输入&输出到文件</A>
+</UL>
+<LI><A NAME="tex2html83"
+  HREF="node13.html">一个简短的风格指南</A>
+<UL>
+<LI><A NAME="tex2html84"
+  HREF="node13.html#SECTION001310000000000000000">过程和变量</A>
+<LI><A NAME="tex2html85"
+  HREF="node13.html#SECTION001320000000000000000">缩进、回车、及空格</A>
+<LI><A NAME="tex2html86"
+  HREF="node13.html#SECTION001330000000000000000">注释</A>
+<LI><A NAME="tex2html87"
+  HREF="node13.html#SECTION001340000000000000000">The big picture</A>
+</UL>
+<LI><A NAME="tex2html88"
+  HREF="node14.html">参考资料</A>
+</UL>
+<!--End of Table of Child-Links-->
+<BR><HR>
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>

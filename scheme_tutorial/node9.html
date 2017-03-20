@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Imperative programming</TITLE>
+<META NAME="description" CONTENT="Imperative programming">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node10.html">
+<LINK REL="previous" HREF="node8.html">
+<LINK REL="up" HREF="schemetutorial.html">
+<LINK REL="next" HREF="node10.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<B> Next:</B> <A NAME="tex2html287"
+  HREF="node10.html">Data types</A>
+<B> Previous:</B> <A NAME="tex2html277"
+  HREF="node8.html">Procedures</A>
+ &nbsp <B>  <A NAME="tex2html285"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H1><A NAME="SECTION00900000000000000000">
+命令式编程</A>
+</H1>
+
+<P>
+Imperative programming means programming with side effects. Scheme being a
+semi-functional language (meaning not completely functional) supports
+imperative programming style as well as functional. The assignment operator
+in Scheme is <TT>set!</TT>, which is a special form and has the following
+syntax:
+<P>
+命令式编程是指有副作用的编程。Scheme 是一门半函数式编程语言（非完全的函数式编程语言），同时支持函数式及命令式编程风格。在 Scheme 里，赋值操作符是 set! 。
+<PRE>
+(set! var expr)
+</PRE>
+
+<P>
+The <I>expr</I> is evaluated and its value is bound to <I>var</I>. This
+is done as a side effect--the value of the <TT>set!</TT> expression itself
+is unspecified! 
+<P>
+expr 被求值，然后值绑定到变量 var.这样做有一个副作用 —— set! 表达式自身的值是不确定的！
+<P>
+The <TT>set!</TT> expression does not create new bindings like 
+<TT>define</TT>, it only changes existing bindings. The <I>var</I> in the
+<TT>set!</TT> expression must therefore be bound before <TT>set!</TT> is
+applied.
+<P>
+set! 没有象 define 那样创建新的变量绑定，它仅仅是改变已存在的绑定。set! 表达式里的变量必须是之前就存在的变量。
+<P>
+For example, let's try to assign the value 10 to <I>a</I> using 
+<TT>set!</TT> without binding <I>a</I> first.
+<P>
+例如，我们可以尝把 10 赋值给一个之前不存在的变量 a 。
+<PRE>
+&gt; (set! a 10)
+set!: cannot set undefined identifier: a
+</PRE>
+
+<P>
+This clearly did not work, so let's use <TT>define</TT> instead.
+<P>
+很显然这没有成功，现在我们用 define 来代替。
+<PRE>
+&gt; (define a 10)
+&gt; a
+10
+</PRE>
+
+<P>
+Now, <I>a</I> is bound and everything is fine. We then want to change the 
+value of <I>a</I> to 5 for some reason, so we use <TT>set!</TT> to
+accomplish our task.
+<P>
+现在，变量 a 已经绑定就绪。接下来，可能因为某种原因我们想把 a 的值修改成 5,我们使用 set! 来完成我们的目标。
+<P>
+<PRE>
+&gt; (set! a 5)
+&gt; a
+5
+</PRE>
+
+<P>
+Why cant we just use <TT>define</TT> instead of <TT>set!</TT> for this?
+Clearly, 
+<P>
+为什么我们不使用 define 来代替 set! 呢？  
+很显然，
+<PRE>
+&gt; (define a 5)
+&gt; a
+5
+</PRE>
+
+<P>
+would have the same effect! In this case we could have used <TT>define</TT>
+instead, but the example above is not really from the real world.
+Definitions are valid only at the beginning of a body and at the top level of
+a program. At the top level, <TT>set!</TT> expressions are equivalent to 
+definitions as long as the variable <I>var</I> is bound.
+<P>
+效果是一样的！在这种情况下，我们可以使用 define 来代替，但是上面的例子并非来自真实的编程工作中。定义(define)仅仅在一个块的开始部分及顶层中有效。在顶层中，set! 表达式等价于 define，只要变量绑定完成。
+
+<P>
+Let's look at another (unrealistic) example: we have a procedure 
+<I>sq!</I> which takes one argument and sets the global variable 
+<I>a</I> to the square of the argument. 
+<P>
+让我们看另外一个例子（非现实）：我们有一个过程叫做 sq!，它接受一个参数，并且设定全局变量 a 的值为参数的平方。
+<P>
+<PRE>
+(define a 0)
+
+(define sq!
+  (lambda (x)
+    (set! a (square x))))
+
+(define square
+  (lambda (x)
+    (* x x)))
+
+&gt; (sq! 10)
+&gt; a
+100
+</PRE>
+
+<P>
+What would have happened if we had tried to use <TT>define</TT> instead of
+<TT>set!</TT>? Let's try to feed the interpreter with the version using
+<TT>define</TT>:
+<P>
+如果我们使用 define 代替 set! 会发生什么？
+<PRE>
+(define sq!
+  (lambda (x)
+    (define a (square x))))
+
+&gt; define-values: illegal use (not at top-level) in: (#%define-values (a) 
+(square x))
+</PRE>
+
+<P>
+Oops! This was clearly illegal! 
+<P>
+很显然这是不合法的！
+
+<P>
+It is a convention in Scheme to name procedures causing mutations with a
+ <I>!</I>, as in <TT>set!</TT> and <I>sq!</I>.
+<P>
+在命名一个有副作用的函数时，在函数名的后边加上一个感叹号是 Scheme 的一个约定。比如 set! 以及 sq!。
+<P>
+<HR>
+<!--Navigation Panel-->
+<B> Next:</B> <A NAME="tex2html287"
+  HREF="node10.html">Data types</A>
+<B> Previous:</B> <A NAME="tex2html277"
+  HREF="node8.html">Procedures</A>
+ &nbsp <B>  <A NAME="tex2html285"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>

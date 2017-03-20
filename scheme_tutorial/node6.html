@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Logical composition operators</TITLE>
+<META NAME="description" CONTENT="Logical composition operators">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node7.html">
+<LINK REL="previous" HREF="node5.html">
+<LINK REL="up" HREF="schemetutorial.html">
+<LINK REL="next" HREF="node7.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<B> Next:</B> <A NAME="tex2html241"
+  HREF="node7.html">Quote and quasiquote</A>
+<B> Previous:</B> <A NAME="tex2html231"
+  HREF="node5.html">Conditional expressions</A>
+ &nbsp <B>  <A NAME="tex2html239"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html242"
+  HREF="node6.html#SECTION00610000000000000000">and</A>
+<LI><A NAME="tex2html243"
+  HREF="node6.html#SECTION00620000000000000000">or</A>
+<LI><A NAME="tex2html244"
+  HREF="node6.html#SECTION00630000000000000000">not</A>
+</UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00600000000000000000">
+逻辑运算符</A>
+</H1>
+
+<P>
+Compound conditions can be built by using the logical composition
+operators <TT>and</TT>, <TT>or</TT> and <TT>not</TT>.   
+
+<P>
+
+<H1><A NAME="SECTION00610000000000000000">
+and</A>
+</H1>
+
+<P>
+ <TT>and</TT> 表达式的语法如下:
+<PRE>
+(and expr1 expr2 ... exprn)
+</PRE>
+Each of the expressions are evaluated in left-to-right order. If all
+expressions evaluate to true, then true is returned as the value of the
+<TT>and</TT> expression<A NAME="tex2html12"
+  HREF="footnode.html#foot699"><SUP>4.1</SUP></A>, 
+otherwise false is returned. If any expression is 
+evaluated to false, the evaluation will stop and false will be returned 
+without the rest of the expressions being evaluated.
+<P>
+自左向右依次求值，如果所有表达式的值为真 (#t)，则返回真；如果其中一个表达式的值为假 (#f)，则停止对后面的表达式求值，返回假作为整个 and 表达式的返回值。剩下的表达式不会被求值。
+<P>
+For example,
+<PRE>
+&gt;(define a 3)
+&gt;(and (&lt; 2 5) (number? a)) 
+#t
+</PRE>
+
+<P>
+2 is smaller than 5 and <I>a</I>, which has the value of 3, is indeed
+a number, hence <TT>#t</TT> is returned.
+<P>
+2 比 5 小，并且 a (a 的值为 3)的确是数字，所以返回 真。
+<P>
+<PRE>
+&gt;(define a 3)
+&gt;(define b 5)
+&gt;(and (= a 3) (&lt; b a) (and (number? a) (number? b)))
+#f
+</PRE>
+
+<P>
+False will be returned, because <I>b</I> is not smaller than <I>a</I>.
+The last expression, which also is an <TT>and</TT> expression, will not
+even be evaluated.
+<P>
+返回假，因为 b 不比 a 小。最后的表达式，也就是另一个 and 表达并不会被求值。
+<P>
+
+<H1><A NAME="SECTION00620000000000000000">
+or</A>
+</H1>
+
+<P>
+<TT>or</TT> 表达式语法如下:
+<PRE>
+(or expr1 expr2 ... exprn)
+</PRE>
+Each of the expressions are evaluated in left-to-right order. As soon as one
+of the expressions evaluates to true, the evaluation will stop and true will
+be returned as the value of the <TT>or</TT> expression<A NAME="tex2html13"
+  HREF="footnode.html#foot700"><SUP>4.2</SUP></A>. If all expressions
+evaluate to false then false will be returned.
+<P>
+每一个表达式自左向右求值，如果所有的表达式为假(#f)，则返回假；只要其中一个表达式的值为真(#t)，则停止对剩下的表达式求值，返回真作为整个 or 表达式的返回值。
+<P>
+例如,
+<PRE>
+&gt;(define a 3)
+&gt;(or (&lt; 2 5) (number? a)) 
+#t
+</PRE>
+
+<P>
+After evaluating the first expression, the truth value can already be
+established and <TT>#t</TT> is returned without even evaluating the rest of 
+the expressions. 
+<P>
+第一个表达式求值后返回值就可以确定了，剩下的表达式不会被求值。
+<P>
+
+<H1><A NAME="SECTION00630000000000000000">
+not</A>
+</H1>
+
+<P>
+not 的语法很简单:
+<PRE>
+(not expr)
+</PRE>
+
+<P>
+If the expression is true, then false will be returned, but if the expression
+is false, then true will be returned.
+<P>
+如果表达式的值为真，则返回假，相反，如果表达式的值为假，则返回真。
+<P>
+例如,
+<PRE>
+&gt;(define a 5)
+&gt;(not (&lt; a 10))
+#f
+</PRE>
+
+<P>
+Actually, <TT>not</TT> always evaluates its argument and is therefore 
+implemented as a normal procedure, whereas <TT>and</TT> and <TT>or</TT> are
+special forms.
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<B> Next:</B> <A NAME="tex2html241"
+  HREF="node7.html">Quote and quasiquote</A>
+<B> Previous:</B> <A NAME="tex2html231"
+  HREF="node5.html">Conditional expressions</A>
+ &nbsp <B>  <A NAME="tex2html239"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>

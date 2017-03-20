@@ -1,0 +1,883 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 99.2beta6 (1.42)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Getting started</TITLE>
+<META NAME="description" CONTENT="Getting started">
+<META NAME="keywords" CONTENT="schemetutorial">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<META NAME="Generator" CONTENT="LaTeX2HTML v99.2beta6">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="schemetutorial.css">
+
+<LINK REL="next" HREF="node5.html">
+<LINK REL="previous" HREF="node3.html">
+<LINK REL="up" HREF="schemetutorial.html">
+<LINK REL="next" HREF="node5.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+
+<B> Next:</B> <A NAME="tex2html205"
+  HREF="node5.html">Conditional expressions</A>
+<B> Previous:</B> <A NAME="tex2html195"
+  HREF="node3.html">Introduction</A>
+ &nbsp <B>  <A NAME="tex2html203"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<!--Table of Child-Links-->
+<A NAME="CHILD_LINKS"><STRONG>Subsections</STRONG></A>
+
+<UL>
+<LI><A NAME="tex2html206"
+  HREF="node4.html#SECTION00410000000000000000">Syntax</A>
+<LI><A NAME="tex2html207"
+  HREF="node4.html#SECTION00420000000000000000">Expressions</A>
+<LI><A NAME="tex2html208"
+  HREF="node4.html#SECTION00430000000000000000">Define</A>
+<LI><A NAME="tex2html209"
+  HREF="node4.html#SECTION00440000000000000000">Lambda</A>
+<LI><A NAME="tex2html210"
+  HREF="node4.html#SECTION00450000000000000000">Let, let* and letrec</A>
+<UL>
+<LI><A NAME="tex2html211"
+  HREF="node4.html#SECTION00451000000000000000">Let</A>
+<LI><A NAME="tex2html212"
+  HREF="node4.html#SECTION00452000000000000000">Let*</A>
+<LI><A NAME="tex2html213"
+  HREF="node4.html#SECTION00453000000000000000">Named let</A>
+<LI><A NAME="tex2html214"
+  HREF="node4.html#SECTION00454000000000000000">Letrec</A>
+</UL></UL>
+<!--End of Table of Child-Links-->
+<HR>
+
+<H1><A NAME="SECTION00400000000000000000">
+入门</A>
+</H1>
+
+<P>
+The best way to get started with Scheme is by playing around with it. This 
+tutorial will show you what you are able to do with Scheme as a language. To 
+get the best out of learning Scheme and this tutorial, start the interpreter 
+and feed it! Try the examples in this tutorial, modify them and see what 
+happens. At the same time, try to understand why the interpreter returns the 
+answer it does. Don't hesitate to try even the most crazy ideas--nobody said 
+that the learning process had to be dead serious.
+<P>
+  学习 Scheme 最好的起步是变着法地玩弄它。这篇教程将展示你可以用 Scheme 做什么。立刻运行 Scheme 解释器，尝试教程里的样例，尝试修改样例，看看会发生什么。同时，尝试理解解释器的回答。别担心这会搞坏你的电脑。
+<P>
+
+<H1><A NAME="SECTION00410000000000000000">
+语法</A>
+</H1>
+
+<P>
+The Scheme syntax is extremely simple: it consists of parentheses (lots of 
+them) and prefix notation. This means that the operator comes leftmost, 
+followed by the operands, for example:
+<P>
+Scheme 的语法极端简单：它由前置操作符和括号（大量的括号）构成。这意味着操作符总是在最左边，紧跟着的是操作数，比如：
+<P>
+<PRE>
+(+ 1 2 3 4)
+</PRE>
+
+<P>
+Parentheses are used to define what is to be computed. In many languages, it
+is possible to add extra parentheses without affecting the program, but this is
+not the case in Scheme. Adding extra parentheses will most likely result in
+errors or other unfortunate behaviour.
+
+<P>
+Comments begin with a semicolon and continue until the end of the line.
+<P>
+括号用来定义什么东西将被计算。在大多数的语言中，可以添加额外的括号，而不会影响该程序，但是在Scheme中不能这么干，多余的括号将引起错误。<P>
+注释从一个分号开始，并一直到行结束。
+<P>
+<PRE>
+(+ 1 2 3 4)  ; 这是一段注释
+</PRE>
+
+<P>
+正式的语法描述是 <IMG
+ WIDTH="46" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="R5RS">.
+
+<P>
+
+<H1><A NAME="SECTION00420000000000000000">
+表达式</A>
+</H1>
+
+<P>
+There are two types of expressions: primitive and derived. 
+<P>
+有两种类型的表达式：原始表达式和派生表达式。
+
+<P>
+Primitive  expressions are, for example, variable references, literal 
+expressions, assignments, conditionals, procedures and procedure calls.
+<p>
+原始表达式：比如变量引用、字面表达式、赋值、条件表达式、过程及过程调用。
+<P>
+An expression consisting of a variable is a variable reference, for example:
+<PRE>
+&gt; (define a 10)
+&gt; a
+10
+</PRE>
+
+<P>
+字面表达式由 <TT>quote</TT> 或者 '创建, 它们是等价的, 比如:
+<PRE>
+&gt; (quote a)
+a
+&gt; 'a
+a
+</PRE>
+
+<P>
+Numbers, characters, strings and booleans need not be quoted since they
+evaluate to themselves:
+<P>
+数字、字符、字符串和布尔值不需要引用，当它们自求值的时候。
+<PRE>
+&gt; 5
+5
+&gt; #\a
+#\a
+&gt; "foobar"
+"foobar"
+&gt; #t
+#t
+</PRE>
+
+<P>
+Assignments are performed using <TT>set!</TT>, for example:
+<P>
+使用 set! 进行赋值，比如：
+<PRE>
+&gt; (define a 10)
+&gt; a
+10
+&gt; (set! a 5)
+&gt; a
+5
+</PRE>
+
+<P>
+Primitive conditional expressions are constructed using <TT>if</TT>, for
+example:
+<P>
+原始的条件表达式由 if 构成，比如：
+<PRE>
+(if (&lt; a 10)
+    1
+    a)
+</PRE>
+
+<P>
+Procedures are created using <TT>lambda</TT> and called by enclosing in
+parentheses expressions for the procedure to be called and the arguments to
+be passed to it:
+<P>
+过程由 lambda 创建，通过圆括号包围起来的表达式调用并传递参数：
+<PRE>
+;; 创建一个过程(匿名函数)
+&gt; (lambda (x) (* x x))
+#&lt;procedure&gt;
+
+;; 调用一个过程
+&gt; (* 2 10)
+20
+&gt; ((if (= 2 (* 2 1)) + *) 2 3)
+5
+&gt; (floor 3.5)
+3.0
+</PRE>
+
+<P>
+Derived expressions are expressions that are implemented in terms of other
+expressions instead of being implemented directly. Conditionals using
+<TT>cond</TT> and <TT>let</TT> expressions are examples of derived expressions.
+Derived expressions can be defined as macros. For more information on 
+macros, see <IMG
+ WIDTH="46" HEIGHT="17" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="R5RS">.
+<P>
+派生表达式由其它表达式实现，而不是直接实现。cond 和 let 就是派生表达式。派生表达式可以通过宏来定义。更多关于宏的信息，请查看r5rs。
+<P>
+Conditionals using <TT>cond</TT> can be constructed using nested <TT>if</TT>
+expressions:
+<P>
+cond 条件表达式可以通来嵌套的 if 表达式来实现。
+<PRE>
+(define a 10)
+
+;; 嵌套的 if 表达式
+(if (&lt; a 10)
+    a
+    (if (&gt; a 20)
+        (* a a)
+        0))
+
+;; cond 条件表达式
+(cond ((&lt; a 10) a)
+      ((&gt; a 20) (* a a))
+      (else 0))
+</PRE>
+
+<P>
+The <TT>let</TT> expressions could be rewritten using <TT>lambda</TT>,
+for example:
+<P>
+let 表达式可以用 lambda 来重写:
+<PRE>
+(let ((a 10)
+      (b 20))
+  (* a b))
+</PRE>
+
+<P>
+  等价于
+
+<P>
+<PRE>
+((lambda (a b) (* a b)) 10 20)
+</PRE>
+
+<P>
+
+<P>
+
+<H1><A NAME="SECTION00430000000000000000">
+Define</A>
+</H1>
+<TT>Define</TT> is used to bind a name to a computational object. 
+
+<P>
+Define 用于将一个对象绑定到一个名字上。
+<p>
+The syntax of the <TT>define</TT> expression is as follows:
+<P>
+  缺省的语法是：
+<PRE>
+(define var expr)
+</PRE>
+
+<P>
+The <I>expr</I> part is evaluated and the value is then bound to the variable
+<I>var</I>. A variable is a symbol to which a value can be assigned and this
+variable is then said to be bound to the given value.
+
+<P>
+  <I>expr</I>部分先被求值，然后求出的值被绑定到变量<I>var</I>上。变量是一个指向具体的值的符号。
+
+<P>
+让我们从一个简单的示例开始:
+<PRE>
+(define a 2)
+</PRE>
+
+<P>
+The third expression is evaluated and has in this case the value of 2. This
+value is then bound to the symbol <I>a</I>.  We can now use the variable in 
+other expressions, e.g.
+<P>
+  第3个表达式被求值（2）,然后这个值被绑定到符号<I>a</I>。现在，我们可以在其它的表达式中使用这个变量了。
+<PRE>
+&gt;(+ a 3)
+5
+</PRE>
+
+<P>
+The expression can of course be more complex than the one mentioned above.
+<P>
+  当然，表达式可以比上面的更复杂。
+<P>
+<PRE>
+(define b (+ 25 (* 3 25)))
+</PRE>
+
+<P>
+<I>b</I> is now bound to the value of the expression, i.e. 100.
+<P>
+  现在，<I>b</I>被绑定到表达式的值（100）。
+<P>
+Also procedures can be named with <TT>define</TT>. Let's say we wish to write a
+procedure for squaring a given argument <I>x</I>. Since we will be calling
+this procedure many times and we do not wish to write <TT>(* x x)</TT> over 
+and over 
+again, we will need a means of abstraction. The syntax for procedure 
+definition is:
+<P>
+  同样，过程(函数)也可以用 define 来命名。比方说，我们想写一个过程（函数）来计算给定参数<I>x</I>的平方。当我们要多次使用这个函数的时候，如果不们不想一次又一次地输入 (* x x)，我们就需要一种抽象的方法。函数定义的语法是：
+<PRE>
+(define (名字 形参) 函数体)
+</PRE>
+
+<P>
+For example, let us create a procedure <I>square</I>, which takes one
+argument and returns its square<A NAME="tex2html3"
+  HREF="footnode.html#foot196"><SUP>2.1</SUP></A>:
+<P>
+  例如，让我们写一个过程 square，接收一个参数，并返回它的平方。
+<P>
+<PRE>
+(define (square x)
+  (* x x))
+</PRE>
+
+<P>
+<I>square</I> is the name of the procedure definition in the environment, 
+<I>x</I> is the formal parameter and <TT>(* x x)</TT> is the body of the 
+procedure.  When the procedure is called, e.g. <TT>(square 8)</TT>, 
+<I>x</I> will be replaced 
+with 8 and the value of the expression <TT>(* 8 8)</TT>, i.e. 64,  will be returned.
+<P>
+  square 是函数定义在环境中的名字，x 是形参，而 (* x x)是函数体。当函数被调用，比如 (square 8) , x 将被替换成 8，然后表达式 (* 8 8) 的值将被返回（64）。
+<P>
+<TT>Define</TT> can be conveniently used to declare global variables and to 
+name  procedures. It is a simple but strong means of abstraction. 
+However, it should never be used to define local 
+variables!<A NAME="tex2html4"
+  HREF="footnode.html#foot197"><SUP>2.2</SUP></A>
+<P>
+define 可以用于声明全局变量，或者命名函数。它是一个简单但强大的抽象方法。但是，从来不用它定义局部变量。
+<P>
+<H1><A NAME="SECTION00440000000000000000"></A>
+<A NAME="lambda"></A>
+<BR>
+Lambda
+</H1>
+The <TT>lambda</TT> expression has the following syntax:
+<P>
+lambda 表达式的语法是：
+<P>
+<PRE>
+(lambda 形参 函数体)
+</PRE>
+
+<P>
+The keyword <TT>lambda</TT> is followed by a list of arguments (zero
+or more) and a body. A <TT>lambda</TT> expression evaluates to a
+procedure, which can be applied to appropriate arguments. When the
+procedure is  applied, the arguments are bound  to the corresponding
+values and the body is evaluated. The only difference between the
+procedure resulting from a <TT>lambda</TT> expression and a procedure
+created by using define is that the procedure  created by the
+<TT>lambda</TT> expression has not been associated with a name in the
+environment.
+<P>
+关键字 lambda 跟随着一个参数列表（可以为空，或者多个参数），然后是函数体。lambda 求值的结果是一个匿名函数，这个匿名函数可以被应用到适当的参数上，参数被绑定到正确的值，然后函数体被求值。使用 lambda 和 define 创建函数唯一的不同是，使用 lambda 创建的函数在环境中没有与一个名字关联。
+<P>
+As mentioned above, <TT>lambda</TT> expressions return a
+procedure. Let's start by  creating a procedure taking one argument
+and returning the argument multiplied by 2.
+<P>
+上面提到的 lambda 表达式返回一个函数。让我们开始创建一个函数，接受一个参数，并且返回参数的2倍值。
+<PRE>
+&gt; (lambda (x) (* 2 x))
+#&lt;procedure&gt;
+</PRE>
+
+<P>
+Now, to use the procedure mentioned above we have to provide it with an
+argument, e.g. 5. This is done in the following way:
+<P>
+使用上面的函数，我们需要传递给它一个参数，比如：5.
+<P>
+<PRE>
+&gt; ((lambda (x) (* 2 x)) 5)
+10
+</PRE>
+
+<P>
+We can also bind the procedure to a name, just as we did earlier with
+<TT>define</TT>. Rewriting the procedure <I>square</I> using <TT>lambda</TT> 
+would result in the following:
+<P>
+我们也可以给函数绑定一个名字，就象我们之前用 define 做的一样。使用 lambda 重写 square 函数：
+<P>
+<PRE>
+(define square
+  (lambda (x)
+    (* x x)))
+</PRE>
+
+<P>
+So, what is the difference between binding the procedure using
+<TT>lambda</TT>  and  using <TT>define</TT> ? The answer is simple:
+<I>practically none</I><A NAME="tex2html5"
+  HREF="footnode.html#foot319"><SUP>2.3</SUP></A>.  The example above is exactly the same as the following:
+<P>
+那么，使用 lambda 和 define 定义函数有什么区别吗？简单的回答是：几乎没有区别。上面的函数和下面这个函数是相同的。
+<P>
+<PRE>
+(define (square x)
+  (* x x))
+</PRE>
+
+<P>
+The latter example is only syntactic sugar for the former example.
+It is usually considered better programming style to write procedures using 
+<TT>lambda</TT> expressions. We will therefore stick to using 
+<TT>lambda</TT> expressions in the future. However, there are people who 
+consider the latter style better since it is more compact, so you are likely to
+see procedures written in both ways. Practically it is of little importance
+in which way you choose to write your programs, the important things are that
+you are consistent about the way you write procedures and that you are able to
+understand procedures written either way.
+<P>
+  事实上，后者仅仅是前者的语法糖衣。通常认为，用 lambda 来写程序是一种比较好的编程风格，所以，接下来我们将坚持使用 lambda 来定义函数。但是，也有人认为后者更好，更紧凑。所以，用这两种风格写的代码你可能都会遇到。事实上，选择哪一种风格并不重要，重要的是编程风格的一致性以及你能够理解用两种方法写的函数。
+<P>
+Let us take a look at another example. We want to write a procedure for 
+computing Fibonacci numbers. The procedure will take one integer <I>n</I> as 
+an argument and return the <I>n</I>th Fibonacci number. Further description
+of the procedure can be found in <I>Structure and Interpretation of
+Computer Programs</I>. We will write two versions of the procedure--one that uses
+a <TT>lambda</TT> expression and one that does not<A NAME="tex2html6"
+  HREF="footnode.html#foot291"><SUP>2.4</SUP></A>:
+<P>
+让我们看看另外的示例。我们想写一个计算裴波那契数列的函数。该函数接受一个整数 n 作为参数，返回第 n 个裴波那契数。关于本程序更进一步的说明可以在 SICP 中找到。我们将写两个版本的函数，一个版本使用 lambda, 另一个版本不使用 lambda。
+<P>
+<PRE>
+;; A procedure for counting the n:th Fibonacci number
+;; See SICP, p. 37
+(define fib
+  (lambda (n)
+    (cond ((= n 0) 0)  
+          ((= n 1) 1)
+          (else (+ (fib (- n 1))
+                   (fib (- n 2)))))))
+
+;; The same procedure written without using lambda
+(define (fib n)
+  (cond ((= n 0) 0)  
+        ((= n 1) 1)
+        (else (+ (fib (- n 1))
+                 (fib (- n 2))))))
+</PRE>
+
+<P>
+The procedure fib is called in the following way:
+<P>
+fib 函数可以通过下面的方式调用：
+<PRE>
+&gt;(fib 5)
+5
+</PRE>
+<I>n</I> is then substituted with 5 and the body of the procedure is 
+evaluated.
+<P>
+  n 被具体的参数 5 取代，然后函数体被求值。
+<P>
+It is also possible for the <TT>lambda</TT> expressions to take more than one
+argument. For example, we want to compute the sum of two given arguments
+<I>x</I> and <I>y</I> and give the procedure the marvellous name 
+<I>sum</I>:
+<p>
+lambda 表达式也可以接受更多的参数。比如我们想计算 x y 这两个数的和，并且给函数取一个神奇的名字：sum：
+<PRE>
+(define sum
+  (lambda (x y)
+    (+ x y)))
+</PRE>
+
+<P>
+It is also possible to take an arbitrary number of arguments. For example,
+let's rewrite the procedure <I>sum</I> to take an arbitrary number of
+arguments<A NAME="tex2html7"
+  HREF="footnode.html#foot320"><SUP>2.5</SUP></A>:
+<p>
+参数也可以是任意数量的。让我们改写 sum 函数，让它接受任意数量的参数：
+<PRE>
+(define sum
+  (lambda (x . y)
+    (apply + x y)))
+</PRE>
+
+<P>
+Dotted notation is usually used for denoting the possibility of taking
+an arbitrary number of arguments. The arguments after the dot is
+represented as a list<A NAME="tex2html8"
+  HREF="footnode.html#foot321"><SUP>2.6</SUP></A>, which may be empty. The arguments before the dot
+are required. Hence, the procedure above expects at least one
+argument.
+
+<P>
+It is also possible to write procedures taking 0-<IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img2.png"
+ ALT="n"> arguments. 
+For example, if we want to write a procedure <I>list</I><A NAME="tex2html9"
+  HREF="footnode.html#foot322"><SUP>2.7</SUP></A> that constructs and
+returns a list of its arguments, we can omit the dot and write it using 
+<TT>lambda</TT>:
+<p>
+句点通常用于代表可变数量的参数，句点后面的参数代表一个列表——它可以为空。句点前的参数是必需的。所以，上面的函数需要最少一个参数。
+<br>
+也可以写出接受 0-n 个参数的函数来。比如下面的 list 函数。它接受任意的参数，返回用它们构造的列表。我们可能使用 lambda 并且省略句点：
+<PRE>
+(define list
+  (lambda args args))
+</PRE>
+
+<P>
+Note that both the dot and the parenthesis has disappeared and that
+<I>args</I> is a list! We can, of course, rewrite this without using
+<TT>lambda</TT>, but in that case we are not allowed to omit the dot:
+<p>
+注意，括号和句点都不见了，args是一个列表。当然，我们也可以不使用 lambda, 如果那样，句点就不能省略了：
+<PRE>
+(define (list . args) 
+  args)
+</PRE>  
+
+<P>
+The procedures are practically equivalent, but the latter looks more
+cryptic than the former. To see how they work, let's take a look at a
+few examples:
+<p>
+两种写法几乎没区别，但是后者看起来比前者更模糊。让我们用一些小例子测试看看它们如何工作：
+<PRE>
+&gt; (list 1 2 3)
+(1 2 3)
+&gt; (list)
+()
+</PRE>  
+
+<P>
+
+<H1><A NAME="SECTION00450000000000000000">
+Let, let* and letrec</A>
+</H1>
+
+<P>
+<TT>Let</TT>, <TT>let*</TT> and <TT>letrec</TT> are used to create local 
+variables. The syntax of these three forms are the same. The difference
+lies in the regions they establish for their variable bindings and in which 
+order the variables are bound.
+There is also a construct called named <TT>let</TT>, which is a variant of 
+<TT>let</TT>. Some prefer to say that named <TT>let</TT> is merely a variant
+of the syntax of <TT>let</TT>.
+<P>
+let let* letrec 用来创建局部变量。它们三者的语法是相同的，不同之处在于变量的作用域及顺序。<br>
+还有一种命名的 let 结构，这是 let 的一个变种。有些人喜欢说，命名的 let 仅仅是一个 let 语法的变种。
+<P>
+
+<H2><A NAME="SECTION00451000000000000000">
+Let</A>
+</H2>
+
+<P>
+The syntax of the <TT>let</TT> expression is the following:
+<p>
+let 表达式的语法如下：
+<PRE>
+(let ((var1 exp1) 
+      (var2 exp2) 
+      .
+      .
+      . 
+      (varn expn))
+  body)
+</PRE>
+
+<P>
+<TT>Let</TT> is only syntactic sugar for an underlying <TT>lambda</TT>
+application:
+<P>
+事实上 let 仅仅是 lambda 的语法糖衣：
+<P>
+<PRE>
+((lambda (var1 var2 ... varn)
+   body)
+ exp1 exp2 ... expn)
+</PRE>
+
+<P>
+Each variable is bound to the corresponding expression. The scope of the
+variables is within the body of the <TT>let</TT> expression. However, 
+<TT>let</TT> binds the variables as locally as possible to where they are used 
+and the values of the variables are computed outside the <TT>let</TT> 
+expression. This matters when  the  expressions providing the values for the 
+local variables depend upon variables with the same names as the local 
+variables. 
+<P>
+每一个变量被绑定到对应的表达式，变量的作用域仅存在于 let 表达式的 body 内部。无论如何，let 把变量的作用域尽量局限在它们有可能被使用的的地方，以及变量的值在 let 表达式外部被计算（不知道啥意思）。这一点很重要（不知所云，大抵是变量作用域及命名冲突的意思）
+<P>
+Let's start with a simple example:
+<P>
+让我们从一个简单的例子开始：
+<PRE>
+&gt;(let ((x 2) (y 10))
+   (+ x y))
+12
+</PRE>
+
+<P>
+<I>x</I> is bound to 2 and <I>y</I> is bound to 10. The scope of x and
+y are within the body of the <TT>let</TT> expression, that is, within 
+<TT>(+ x y)</TT>, which  yields the answer 12.
+<P>
+x 绑定到 2, 而 y 绑定到 10.它们的作用域是 body 内部 ——> <code>(+ x y)</code>，由它生成答案 12。
+<P>
+The <TT>let</TT> expression in the example above is equivalent to the 
+following <TT>lambda</TT> expression:
+<P>
+上面的 let 表达式与下面的 lambda 表达式是等价的：
+<PRE>
+((lambda (x y) (+ x y)) 2 10)
+</PRE>
+
+<P>
+As mentioned above, <TT>let</TT> binds variables as locally as possible. 
+Consider the following expression:
+<P>
+在上面提到过，let 尽可能地局限变量的作用域。<br>
+请思考下面的表达式：
+<P>
+<PRE>
+&gt;(define x 10)       ;;声明一个全局变量 x = 10
+
+&gt;(+ (let ((x 5))     ;;声明一个局部变量 x = 5
+      (* x (+ x 2))) ;;这里使用的是局部变量,结果是 (* 5 (+ 5 2)) = 35
+    x)               ;;这里的 x 是全局变量，值是 10，
+45                   ;;(+ 35 10) = 45
+</PRE>
+
+<P>
+The body of the <TT>let</TT> expression is the expression 
+<P>
+let 表达式的 body 是下面的表达式：
+<PRE>
+(* x (+ x 2))
+</PRE>
+
+<P>
+The value of <I>x</I> is 5, as bound with <TT>let</TT>. Hence, the value of 
+the <TT>let</TT> expression is 35. Now, this will be added to another variable 
+<I>x</I>.  This <I>x</I> has  absolutely nothing to do with the <I>x</I> 
+bound in the <TT>let</TT> expression, it just  happened to share the same name.
+The value of this  outside <I>x</I> is 10. Now the values of the outside 
+<I>x</I> and the <TT>let</TT> expression are applied to <TT>+</TT>, which 
+yields the answer 45. 
+<P>
+看代码注释就好。
+<P>
+The values of the variables are computed outside <TT>let</TT>. Consider the 
+following expression:
+<PRE>
+&gt;(define x 10)
+
+&gt;(let ((x 5)
+      (y (* x 2))) ;;要注意啊，这里的 x 是引用上面的全局变量，因为这里不属于 body
+  (+ x y))         ;;这才是 body
+25
+</PRE>
+
+<P>
+The variable <I>x</I> will be bound to the value 5 and the variable 
+<I>y</I> will be bound to 20, not to 10. This is because the <I>x</I> in 
+the expression for <I>y</I> is computed outside the <TT>let</TT> expression and the 
+value of that <I>x</I> is 10. 
+
+<P>
+Keep in mind that <TT>let</TT> is used to create local variables, whereas
+<TT>define</TT> is usually used to create global variables!
+<P>
+要注意，let 用于创建局部变量，而 define 通常用于创建全局变量！
+<P>
+What if we wanted to use the <I>x</I> declared in the <TT>let</TT> 
+expression mentioned above? Well, Scheme provides another form of <TT>let</TT>,
+i.e. <TT>let*</TT>.
+<P>
+如果我们想在上面的 let 表达式中引用刚刚声明的局部变量怎么办？Scheme 提供另外的一个 let*
+<P>
+
+<H2><A NAME="SECTION00452000000000000000">
+Let*</A>
+</H2>
+
+<P>
+The syntax of <TT>let*</TT> is similar to that of <TT>let</TT>:
+<P>
+let* 的语法与 let 类似:
+<PRE>
+(let* ((var1 exp1) 
+       (var2 exp2) 
+       .
+       .
+       . 
+       (varn expn))
+  body)
+</PRE>
+
+<P>
+The semantics, however, is somewhat different. 
+<TT>let*</TT> is equivalent to a sequence of nested <TT>let</TT> expressions:
+<P>
+语义上有些差别。let* 相当于嵌套的 let 表达式：
+<PRE>
+(let ((var1 expr1))
+  (let ((var2 expr2))
+    (let ...
+      (let ((varn exprn))
+        body) ... )))
+</PRE>
+
+<P>
+The bindings in a <TT>let*</TT> expression are evaluated from left to right, 
+which means that the value of a variable may contain variables from previous 
+bindings.
+<P>
+let* 中的绑定从左到右求值，这意味着早先定义的变量可以被后面的定义引用。
+<P>
+Consider the example studied above rewritten with a <TT>let*</TT> expression:
+<P>思考下面这个用 let* 重写的表达式：
+<PRE>
+&gt;(define x 10)
+
+&gt;(let* ((x 5)
+       	(y (* x 2))) ;;这里的 x = 5, 而不是全局变量 x 的 10
+   (+ x y))
+15
+</PRE>
+
+<P>
+The value of the <TT>let*</TT> expression is 15, since the variable 
+<I>x</I> bound in the <TT>let</TT> expression will be used when computing
+the value for the variable <I>y</I>. The value of <I>x</I> is 5. 
+Now, the body of the <TT>let*</TT> expression is computed and the result is 15.
+
+<P>
+
+<H2><A NAME="SECTION00453000000000000000"></A>
+<A NAME="nlet"></A>
+<BR>
+Named let
+</H2>
+Named <TT>let</TT><A NAME="tex2html10"
+  HREF="footnode.html#foot488"><SUP>2.8</SUP></A> provides a 
+more general looping construct than <TT>do</TT><A NAME="tex2html11"
+  HREF="footnode.html#foot489"><SUP>2.9</SUP></A>. It is 
+usually used for iteration, but can also be used to express recursions. 
+Named <TT>let</TT> has the 
+following syntax:
+<P>
+命名的 let 提供了一种比 do 更通用的循环结构。它通常用于迭代，但是也可以用来表示递归。<br>
+下面是语法：
+<PRE>
+(let var bindings body)
+</PRE>
+
+<P>
+The syntax and semantics are the same as for <TT>let</TT>, but 
+the <I>var</I> part is bound within <I>body</I> to a procedure, whose 
+formal arguments are the bound variables (in <I>bindings</I>) and whose body 
+is <I>body</I>.  It is now possible to invoke <I>body</I> repeatedly by
+calling the procedure named by <I>var</I>.
+<P>
+语法和语义与 let 相似，但是 var（变量）部分是一个函数，它使用"绑定"部分定义的值作为参数。它的函数体就是 body 部分。现在，可以通过调用 var 来重复地执行函数体（递归）。
+<P>
+Let us write a procedure computing factorials using named <TT>let</TT>:
+<P>
+让我们用 let 写一个计算阶乘和函数：
+<PRE>
+(define factorial
+  (lambda (n)
+    (let iter ((product 1)  ;;相当于C里面的for循环赋初值，递归过程中这里的值不再起作用
+               (counter 1)) ;;而是在调用时传递进来
+      (if (&gt; counter n)
+          product
+          (iter (* counter product) (+ counter 1))))))
+</PRE>
+
+<P>
+
+<H2><A NAME="SECTION00454000000000000000">
+Letrec</A>
+</H2>
+
+<P>
+The syntax for <TT>letrec</TT> is the following:
+<P>
+下面是 letrec 的语法：
+<PRE>
+(letrec ((var1 val1)
+         (var2 val2)
+         .
+         .
+         .
+         (varn valn))
+  body)
+</PRE>
+
+<P>
+The idea behind <TT>letrec</TT> expressions is to allow recursion in the 
+definition of the variables bound locally. The scope of the variables include
+the other variables as well as the body. Any procedure body containing 
+internal definitions can be converted into a completely equivalent 
+<TT>letrec</TT> expression. Let's see how to convert the procedure
+for counting factorials into an equivalent procedure using a <TT>letrec</TT> 
+expression instead of internal definitions:
+<P>
+letrec 背后的观念就是允许在局部变量定义中递归。变量的作用域包括 body 部分，以及其它变量的定义部分 。任何函数体内部的定义可以完整地改写为等价的 letrec 表达式。让我们看看如何把计算阶乘的函数改写为使用 letrec 表达式来替换内部定义。
+<PRE>
+;; The procedure factorial taken from SICP, p. 33 
+(define (factorial n)
+  (define (iter product counter)
+    (if (&gt; counter n)
+        product
+        (iter (* counter product)
+              (+ counter 1))))
+  (iter 1 1))
+</PRE>
+
+<PRE>
+;; The procedure factorial rewritten using letrec
+(define factorial
+  (lambda (n)
+    (letrec ((iter
+              (lambda (product counter)
+                (if (&gt; counter n)
+                    product
+                    (iter (* counter product)
+                          (+ counter 1))))))
+      (iter 1 1)))
+</PRE>
+
+<P>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<B> Next:</B> <A NAME="tex2html205"
+  HREF="node5.html">Conditional expressions</A>
+<B> Previous:</B> <A NAME="tex2html195"
+  HREF="node3.html">Introduction</A>
+ &nbsp <B>  <A NAME="tex2html203"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+Timo Lilja
+2001-09-11
+</ADDRESS>
+</BODY>
+</HTML>
