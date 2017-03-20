@@ -8,3 +8,5 @@ redcarpet:
 pygments:      true
 safe:          true
 auto:          true
+
+theme: jekyll-theme-slate
