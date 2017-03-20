@@ -1,1 +1,4 @@
-theme: jekyll-theme-slate
+theme:         jekyll-theme-slate
+permalink:     /:year-:month-:day/:title.html
+url:           http://uternet.github.io
+author:        Lazy_Pig
