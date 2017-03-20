@@ -1,4 +1,4 @@
-theme:         jekyll-theme-midnight
+theme:         jekyll-theme-modernist
 permalink:     /:year-:month-:day/:title.html
 url:           http://uternet.github.io
 title:         Lazy_Pig
